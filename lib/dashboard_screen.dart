@@ -1,4 +1,5 @@
-// lib/screens/dashboard/dashboard_screen.dart
+
+
 import 'package:flutter/material.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -7,9 +8,134 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Dashboard')),
-      body: const Center(
-        child: Text('Welcome to the Dashboard!'),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 1,
+        title: Row(
+          children: [
+            Image.asset('assets/images/f.jpeg', height: 30),
+            const SizedBox(width: 8),
+            const Text(
+              'SHOPPER',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+            const Spacer(),
+            _navItem('Shop'),
+            _navItem('Men'),
+            _navItem('Women'),
+            _navItem('Kids'),
+            const SizedBox(width: 16),
+            OutlinedButton(
+              onPressed: () {
+                
+              },
+              child: const Text("Logout"),
+            ),
+            const SizedBox(width: 8),
+            IconButton(
+              onPressed: () {
+                
+              },
+              icon: const Icon(Icons.shopping_cart_outlined),
+              color: Colors.black,
+            ),
+          ],
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Row(
+          children: [
+            Expanded(
+              flex: 3,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "NEW ARRIVALS ONLY",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.black54,
+                      letterSpacing: 2,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  const Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: "new 👋\n",
+                          style: TextStyle(
+                            fontSize: 48,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextSpan(
+                          text: "collections\n",
+                          style: TextStyle(
+                            fontSize: 48,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextSpan(
+                          text: "for everyone",
+                          style: TextStyle(
+                            fontSize: 48,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      // TODO: Navigate to collection
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.redAccent,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 14,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                    child: const Text(
+                      "Latest Collection ➝",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 20),
+            Expanded(
+              flex: 2,
+              child: Image.asset('assets/images/f.jpeg', fit: BoxFit.contain),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _navItem(String title) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: TextButton(
+        onPressed: () {},
+        child: Text(
+          title,
+          style: const TextStyle(color: Colors.black87, fontSize: 16),
+        ),
       ),
     );
   }
