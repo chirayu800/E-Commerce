@@ -1,14 +1,17 @@
-import 'package:e_commerce/features/auth/domain/entity/user_entity.dart';
 import 'package:e_commerce/features/auth/domain/use_case/login_usecase.dart';
 import 'package:e_commerce/features/auth/domain/use_case/register_usecase.dart';
 import 'package:flutter/material.dart';
+import 'package:e_commerce/features/auth/domain/entity/user_entity.dart';
 
 
 class AuthViewModel extends ChangeNotifier {
   final LoginUseCase loginUseCase;
   final RegisterUseCase registerUseCase;
 
-  AuthViewModel({required this.loginUseCase, required this.registerUseCase});
+  AuthViewModel({
+    required this.loginUseCase,
+    required this.registerUseCase,
+  });
 
   String? _error;
   String? get error => _error;
@@ -21,9 +24,13 @@ class AuthViewModel extends ChangeNotifier {
     return false;
   }
 
-  Future<bool> register(String email, String password) async {
+  Future<bool> register(String name, String email, String password) async {
     try {
-      await registerUseCase(UserEntity(email: email, password: password));
+      await registerUseCase(UserEntity(
+        name: name,
+        email: email,
+        password: password,
+      ));
       return true;
     } catch (e) {
       _error = "Failed to register";
