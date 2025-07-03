@@ -1,39 +1,95 @@
-import 'package:e_commerce/features/auth/domain/entity/user_entity.dart';
-import 'package:e_commerce/features/auth/domain/use_case/login_usecase.dart';
-import 'package:e_commerce/features/auth/domain/use_case/register_usecase.dart';
+
+import 'package:e_commerce/config/constant/show_snackbar.dart';
+import 'package:e_commerce/config/router/app_routes.dart';
+import 'package:e_commerce/features/auth/domain/usecase/login_usecase.dart';
+import 'package:e_commerce/features/auth/domain/usecase/register_usecase.dart';
+import 'package:e_commerce/features/auth/presentation/state/auth_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+final authViewModelProvider = StateNotifierProvider<AuthViewModel, AuthState>((
+  ref,
+) {
+  return AuthViewModel(ref.read(registerUsecaseProvider), ref.read(loginUsecaseProvider));
+});
 
-class AuthViewModel extends ChangeNotifier {
-  final LoginUseCase loginUseCase;
-  final RegisterUseCase registerUseCase;
+class AuthViewModel extends StateNotifier<AuthState> {
+  final RegisterUsecase registerUsecase;
+  final LoginUsecase loginUsecase;
 
-  AuthViewModel({required this.loginUseCase, required this.registerUseCase});
+  AuthViewModel(this.registerUsecase, this.loginUsecase) : super(AuthState.initial());
 
-  String? _error;
-  String? get error => _error;
+  Future<void> register({
+     required String fullName,
+    required String email,
+    required String userName,
+    required String phoneNumber,
+    required String password,
+    required BuildContext context
+  }) async {
+    state = state.copyWith(isLoading: false);
+    final result = await registerUsecase.register(fullName: fullName, email: email, userName: userName, phoneNumber: phoneNumber, password: password);
 
-  Future<bool> login(String email, String password) async {
-    final user = await loginUseCase(email, password);
-    if (user != null) return true;
-    _error = "Invalid credentials";
-    notifyListeners();
-    return false;
+    result.fold(
+      (failure) {
+        state = state.copyWith(error: failure.error, showMessage: true);
+        showSnackBar(
+          message: failure.error,
+          context: context,
+          color: Colors.red,
+        );
+      },
+      (success) {
+        state = state.copyWith(
+          isLoading: false,
+          error: null,
+          showMessage: true,
+        );
+        EasyLoading.show(
+          status: 'Please Wait...',
+          maskType: EasyLoadingMaskType.black,
+        );
+        Future.delayed(const Duration(seconds: 2), () {
+          EasyLoading.showSuccess('Register Successfully');
+          Navigator.pushNamed(context, AppRoutes.loginRoute);
+          EasyLoading.dismiss();
+        });
+      },
+    );
   }
 
-  Future<bool> register(String email, String password) async {
-    try {
-      await registerUseCase(UserEntity(email: email, password: password));
-      return true;
-    } catch (e) {
-      _error = "Failed to register";
-      notifyListeners();
-      return false;
-    }
-  }
+  Future<void> login(
+     {
+      required String userName, required String password, required BuildContext context
+     }) async {
+    state = state.copyWith(isLoading: false);
+    final result = await loginUsecase.login(userName: userName, password: password);
+    result.fold((failure) {
+      state = state.copyWith(
+        error: failure.error.toString(),
+        showMessage: true,
+      );
+      showSnackBar(
+          message: failure.error.toString(),
+          context: context,
+          color: Colors.red);
+    }, (success) {
+      state = state.copyWith(
+        isLoading: false,
+        error: null,
+        showMessage: true,
+      );
+            EasyLoading.show(status: 'Please Wait...', maskType: EasyLoadingMaskType.black);
 
-  void clearError() {
-    _error = null;
-    notifyListeners();
+      Future.delayed(const Duration(seconds: 2), () {
+        Navigator.pushReplacementNamed(context, AppRoutes.bootomNavRoute);
+      EasyLoading.showSuccess('Loggedin in',);
+        EasyLoading.dismiss();
+      });
+    });
   }
+}
+
+class AppRoute {
 }
