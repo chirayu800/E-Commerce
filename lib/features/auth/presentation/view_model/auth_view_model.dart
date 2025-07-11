@@ -80,12 +80,12 @@ class AuthViewModel extends StateNotifier<AuthState> {
         error: null,
         showMessage: true,
       );
-            EasyLoading.show(status: 'Please Wait...', maskType: EasyLoadingMaskType.black);
+            // EasyLoading.show(status: 'Please Wait...', maskType: EasyLoadingMaskType.black);
 
       Future.delayed(const Duration(seconds: 2), () {
         Navigator.pushReplacementNamed(context, AppRoutes.bootomNavRoute);
-      EasyLoading.showSuccess('Loggedin in',);
-        EasyLoading.dismiss();
+      // EasyLoading.showSuccess('Loggedin in',);
+      //   EasyLoading.dismiss();
       });
     });
   }
