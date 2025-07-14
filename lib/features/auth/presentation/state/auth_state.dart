@@ -1,19 +1,18 @@
-
-import 'package:e_commerce/features/auth/data/model/auth_api_model.dart';
+import 'package:e_com/features/auth/data/model/auth_api_model.dart';
 
 class AuthState {
   final bool isLoading;
   final String? error;
   final String? imageName;
   final bool? showMessage;
-  final AuthApiModel currentUser;
+  final AuthApiModel? authApiModel;
 
   AuthState({
     required this.isLoading,
     this.error,
     this.imageName,
     this.showMessage,
-    required this.currentUser,
+    this.authApiModel,
   });
 
   factory AuthState.initial() {
@@ -22,14 +21,7 @@ class AuthState {
       error: null,
       imageName: null,
       showMessage: false,
-      currentUser: AuthApiModel(
-        fullName: null,
-        email: null,
-        userName: null,
-        phoneNumber: null,
-        password: null,
-        image: "",
-      ),
+      authApiModel: null,
     );
   }
 
@@ -45,11 +37,11 @@ class AuthState {
       error: error ?? this.error,
       imageName: imageName ?? this.imageName,
       showMessage: showMessage ?? this.showMessage,
-      currentUser: currentUser ?? this.currentUser,
+      authApiModel: authApiModel ?? this.authApiModel,
     );
   }
 
   @override
   String toString() =>
-      'AuthState(isLoading: $isLoading, error: $error, currentUser: $currentUser)';
+      'AuthState(isLoading: $isLoading, error: $error, currentUser: $authApiModel)';
 }

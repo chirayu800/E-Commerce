@@ -1,9 +1,9 @@
-
-import 'package:e_commerce/config/constant/show_snackbar.dart';
-import 'package:e_commerce/config/router/app_routes.dart';
-import 'package:e_commerce/features/auth/domain/usecase/login_usecase.dart';
-import 'package:e_commerce/features/auth/domain/usecase/register_usecase.dart';
-import 'package:e_commerce/features/auth/presentation/state/auth_state.dart';
+import 'package:e_com/config/constant/show_snackbar.dart';
+import 'package:e_com/config/router/app_routes.dart';
+import 'package:e_com/features/auth/data/model/auth_api_model.dart';
+import 'package:e_com/features/auth/domain/usecase/login_usecase.dart';
+import 'package:e_com/features/auth/domain/usecase/register_usecase.dart';
+import 'package:e_com/features/auth/presentation/state/auth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,15 +21,13 @@ class AuthViewModel extends StateNotifier<AuthState> {
   AuthViewModel(this.registerUsecase, this.loginUsecase) : super(AuthState.initial());
 
   Future<void> register({
-     required String fullName,
+     required String name,
     required String email,
-    required String userName,
-    required String phoneNumber,
     required String password,
     required BuildContext context
   }) async {
     state = state.copyWith(isLoading: false);
-    final result = await registerUsecase.register(fullName: fullName, email: email, userName: userName, phoneNumber: phoneNumber, password: password);
+    final result = await registerUsecase.register(name: name, email: email, password: password);
 
     result.fold(
       (failure) {
@@ -63,12 +61,13 @@ class AuthViewModel extends StateNotifier<AuthState> {
      {
       required String userName, required String password, required BuildContext context
      }) async {
-    state = state.copyWith(isLoading: false);
+    state = state.copyWith(isLoading: true);
     final result = await loginUsecase.login(userName: userName, password: password);
     result.fold((failure) {
       state = state.copyWith(
         error: failure.error.toString(),
         showMessage: true,
+        isLoading: false
       );
       showSnackBar(
           message: failure.error.toString(),
@@ -85,7 +84,7 @@ class AuthViewModel extends StateNotifier<AuthState> {
       Future.delayed(const Duration(seconds: 2), () {
         Navigator.pushReplacementNamed(context, AppRoutes.bootomNavRoute);
       // EasyLoading.showSuccess('Loggedin in',);
-      //   EasyLoading.dismiss();
+        // EasyLoading.dismiss();
       });
     });
   }

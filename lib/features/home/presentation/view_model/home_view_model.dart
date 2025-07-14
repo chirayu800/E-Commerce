@@ -1,4 +1,4 @@
-import 'package:e_commerce/features/home/presentation/state/home_state.dart';
+import 'package:e_com/features/home/presentation/state/home_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final homeViewModelProvider = StateNotifierProvider<HomeViewModel, HomeState>((ref){

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:e_commerce/config/constant/api_endpoints.dart';
-import 'package:e_commerce/core/network/dio_error_interceptor.dart';
+import 'package:e_com/config/constant/api_endpoints.dart';
+import 'package:e_com/core/network/dio_error_interceptor.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 

@@ -1,7 +1,6 @@
 // product_view_model.dart
-
-import 'package:e_commerce/features/products/data/datasource/product_remote_datasource.dart';
-import 'package:e_commerce/features/products/presentation/state/product_state.dart';
+import 'package:e_com/features/products/data/datasource/product_remote_datasource.dart';
+import 'package:e_com/features/products/presentation/state/product_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final productViewModelProvider =

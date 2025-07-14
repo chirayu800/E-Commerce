@@ -1,4 +1,4 @@
-import 'package:e_commerce/config/router/app_routes.dart';
+import 'package:e_com/config/router/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
