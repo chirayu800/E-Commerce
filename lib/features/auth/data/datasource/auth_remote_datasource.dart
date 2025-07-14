@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:e_com/config/constant/api_endpoints.dart';
-import 'package:e_com/core/failure/failure.dart';
-import 'package:e_com/core/network/http_service.dart';
-import 'package:e_com/core/provider/flutter_secure_storage_provider.dart';
+import 'package:e_commerce/config/constant/api_endpoints.dart';
+import 'package:e_commerce/core/failure/failure.dart';
+import 'package:e_commerce/core/network/http_service.dart';
+import 'package:e_commerce/core/provider/flutter_secure_storage_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 

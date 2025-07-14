@@ -1,6 +1,7 @@
-import 'package:e_com/features/auth/presentation/view/login_view.dart';
-import 'package:e_com/features/auth/presentation/view/register_view.dart';
-import 'package:e_com/features/home/presentation/view/bottom_view.dart';
+
+import 'package:e_commerce/features/auth/presentation/view/login_view.dart';
+import 'package:e_commerce/features/auth/presentation/view/register_view.dart';
+import 'package:e_commerce/features/home/presentation/view/bottom_view.dart';
 
 class AppRoutes {
   AppRoutes._();

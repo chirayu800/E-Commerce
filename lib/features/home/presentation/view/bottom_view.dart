@@ -1,4 +1,5 @@
-import 'package:e_com/features/home/presentation/view_model/home_view_model.dart';
+
+import 'package:e_commerce/features/home/presentation/view_model/home_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

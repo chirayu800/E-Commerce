@@ -1,4 +1,5 @@
-import 'package:e_com/features/products/data/model/product_api_model.dart';
+
+import 'package:e_commerce/features/products/data/model/product_api_model.dart';
 
 class ProductState {
   final List<ProductApiModel> products;

@@ -1,9 +1,9 @@
-import 'package:e_com/config/constant/show_snackbar.dart';
-import 'package:e_com/config/router/app_routes.dart';
-import 'package:e_com/features/auth/data/model/auth_api_model.dart';
-import 'package:e_com/features/auth/domain/usecase/login_usecase.dart';
-import 'package:e_com/features/auth/domain/usecase/register_usecase.dart';
-import 'package:e_com/features/auth/presentation/state/auth_state.dart';
+
+import 'package:e_commerce/config/constant/show_snackbar.dart';
+import 'package:e_commerce/config/router/app_routes.dart';
+import 'package:e_commerce/features/auth/domain/usecase/login_usecase.dart';
+import 'package:e_commerce/features/auth/domain/usecase/register_usecase.dart';
+import 'package:e_commerce/features/auth/presentation/state/auth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

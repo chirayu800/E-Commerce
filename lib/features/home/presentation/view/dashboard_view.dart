@@ -1,8 +1,8 @@
-import 'package:e_com/features/products/presentation/state/product_state.dart';
+
+import 'package:e_commerce/features/products/presentation/state/product_state.dart';
+import 'package:e_commerce/features/products/presentation/view_model/product_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'package:e_com/features/products/presentation/view_model/product_view_model.dart'; // Assuming this path is correct
 
 class DashboardView extends ConsumerStatefulWidget {
   const DashboardView({super.key});

@@ -1,4 +1,5 @@
-import 'package:e_com/features/auth/data/model/auth_api_model.dart';
+
+import 'package:e_commerce/features/auth/data/model/auth_api_model.dart';
 
 class AuthState {
   final bool isLoading;
