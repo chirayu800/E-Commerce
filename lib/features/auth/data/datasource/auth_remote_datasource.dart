@@ -4,6 +4,7 @@ import 'package:e_commerce/config/constant/api_endpoints.dart';
 import 'package:e_commerce/core/failure/failure.dart';
 import 'package:e_commerce/core/network/http_service.dart';
 import 'package:e_commerce/core/provider/flutter_secure_storage_provider.dart';
+import 'package:e_commerce/features/auth/data/model/auth_api_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -61,7 +62,36 @@ class AuthRemoteDatasource {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
+        await flutterSecureStorage.write(
+          key: "userId",
+          value: response.data['user']['_id'],
+        );
         return Right(true);
+      } else {
+        return Left(
+          Failure(
+            error: response.data['message'] ?? 'Unexpected error',
+            statusCode: response.statusCode.toString(),
+          ),
+        );
+      }
+    } on DioException catch (e) {
+      return Left(
+        Failure(error: e.response?.data['message'] ?? 'Registration failed'),
+      );
+    }
+  }
+
+  Future<Either<Failure, AuthApiModel>> getProfile() async {
+    try {
+      final userId = await flutterSecureStorage.read(key: 'userId');
+      final url = "${ApiEndpoints.profile}/$userId";
+      final response = await dio.get(url);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = response.data['user'];
+        final user = AuthApiModel.fromJson(data);
+        return Right(user);
       } else {
         return Left(
           Failure(

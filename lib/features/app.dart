@@ -16,7 +16,7 @@ class _MyAppState extends ConsumerState<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute:  AppRoutes.registerRoute,
+      initialRoute:  AppRoutes.loginRoute,
       routes: AppRoutes.getApplicationRoute(),
       builder: EasyLoading.init(),
     );
