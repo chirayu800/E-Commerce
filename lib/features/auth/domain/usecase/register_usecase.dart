@@ -1,20 +1,21 @@
-// import 'package:dartz/dartz.dart';
-// import 'package:e_commerce/core/failure/failure.dart';
-// import 'package:e_commerce/features/auth/domain/repository/i_auth_repository.dart';
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:dartz/dartz.dart';
+import 'package:e_commerce/core/failure/failure.dart';
+import 'package:e_commerce/features/auth/domain/repository/i_auth_repository.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// final registerUsecaseProvider =
-//     Provider.autoDispose<RegisterUsecase>((ref) => RegisterUsecase(ref.read(iauthRepositoryProvider)));
+final registerUsecaseProvider = Provider.autoDispose<RegisterUsecase>(
+    (ref) => RegisterUsecase(ref.read(iauthRepositoryProvider)));
 
-// class RegisterUsecase {
-//   final IauthRepository iauthRepository;
-//   RegisterUsecase(this.iauthRepository);
+class RegisterUsecase {
+  final IauthRepository iauthRepository;
+  RegisterUsecase(this.iauthRepository);
 
-//   Future<Either<Failure, bool>> register({
-//      required String name,
-//     required String email,
-//     required String password,
-//   }) {
-//     return iauthRepository.register(name: name, email: email,  password: password);
-//   }
-// }
+  Future<Either<Failure, bool>> register({
+    required String name,
+    required String email,
+    required String password,
+  }) {
+    return iauthRepository.register(
+        name: name, email: email, password: password);
+  }
+}
